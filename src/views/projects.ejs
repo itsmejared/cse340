@@ -2,28 +2,17 @@
 <main>
   <h1><%= title %></h1>
   <h2>Upcoming Service Projects</h2>
-
   <ul class="project-list">
+    <% projects.forEach(project => { %>
     <li>
       <div>
-        <h3>Park Cleanup</h3>
-        <p>Join us to clean up local parks and make them beautiful!</p>
+        <p>
+          <%= new Date(project.project_date).toLocaleDateString() %>: <%=
+          project.title %> (<%= project.organization_name %>)
+        </p>
       </div>
     </li>
-
-    <li>
-      <div>
-        <h3>Food Drive</h3>
-        <p>Help collect and distribute food to those in need.</p>
-      </div>
-    </li>
-
-    <li>
-      <div>
-        <h3>Community Tutoring</h3>
-        <p>Volunteer to tutor students in various subjects.</p>
-      </div>
-    </li>
+    <% }) %>
   </ul>
 </main>
 <%- include('partials/footer') %>
