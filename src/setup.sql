@@ -19,7 +19,7 @@ VALUES
 ('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
 
 -- ========================================
--- Create Table: Organizations
+-- Create Table: Service Project
 -- ========================================
 CREATE TABLE service_project (
     project_id SERIAL PRIMARY KEY,
@@ -28,7 +28,6 @@ CREATE TABLE service_project (
     description TEXT NOT NULL,
     location VARCHAR(150) NOT NULL,
     project_date DATE NOT NULL,
-
     CONSTRAINT fk_service_project_organization
         FOREIGN KEY (organization_id)
         REFERENCES organization(organization_id)
@@ -38,7 +37,6 @@ CREATE TABLE service_project (
 -- ========================================
 -- Insert sample data: Service Projects
 -- ========================================
-
 INSERT INTO service_project
 (organization_id, title, description, location, project_date)
 VALUES
@@ -117,3 +115,64 @@ VALUES
 'Preparing and serving holiday meals for families experiencing hardship.',
 'Lehi, UT',
 '2026-12-18');
+
+-- ========================================
+-- Create Table: Categories
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Insert sample data: Categories
+-- ========================================
+INSERT INTO category (name)
+VALUES
+('Community Service'),
+('Environmental Sustainability'),
+('Education & Youth'),
+('Food & Humanitarian Aid');
+
+-- ========================================
+-- Create Table: Service Projects x Category
+-- ========================================
+CREATE TABLE service_project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_spc_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_spc_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+
+-- ========================================
+-- Insert sample data: Service Projects x Category
+-- ========================================
+INSERT INTO service_project_category (project_id, category_id)
+VALUES
+(1, 1),  -- Community Playground Renovation
+(2, 1),  -- Affordable Housing Repair Initiative
+(4, 1),  -- Neighborhood Sidewalk Improvement
+(5, 1),  -- Community Center Expansion Project
+(11, 1), -- Food Drive Distribution
+(12, 1), -- Senior Assistance Outreach
+(3, 2),  -- School Classroom Restoration
+(6, 2),  -- Urban Garden Workshop
+(8, 2),  -- Neighborhood Compost Training
+(9, 2),  -- Community Farmers Market
+(10, 2), -- Tree Planting Volunteer Day
+(3, 3),  -- School Classroom Restoration
+(6, 3),  -- Urban Garden Workshop
+(7, 3),  -- School Greenhouse Build
+(13, 3), -- Back-to-School Supply Giveaway
+(15, 3), -- Holiday Community Meal Service
+(9, 4),  -- Community Farmers Market
+(11, 4), -- Food Drive Distribution
+(14, 4), -- Winter Clothing Donation Event
+(15, 4); -- Holiday Community Meal Service

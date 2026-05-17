@@ -2,29 +2,15 @@
 <main>
   <h1><%= title %></h1>
   <ul class="category-list">
+    <% categories.forEach(category => { %>
     <li>
       <div>
-        <h3>Environmental</h3>
+        <h3>
+          <%= category.name %>
+        </h3>
       </div>
     </li>
-
-    <li>
-      <div>
-        <h3>Educational</h3>
-      </div>
-    </li>
-
-    <li>
-      <div>
-        <h3>Community Service</h3>
-      </div>
-    </li>
-
-    <li>
-      <div>
-        <h3>Health and Wellness</h3>
-      </div>
-    </li>
+    <% }) %>
   </ul>
 </main>
 <%- include('partials/footer') %>
