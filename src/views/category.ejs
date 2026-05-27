@@ -1,17 +1,29 @@
 <%- include('partials/header') %>
 
 <main>
-  <h1><%= category.name %></h1>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+    <h1>
+      <%= category.name %>
+      Projects
+    </h1>
 
-  <ul>
-    <% projects.forEach(project => { %>
-      <li>
-        <a href="/project/<%= project.project_id %>">
-          <%= project.title %>
-        </a>
+    <h2><%= category.name %></h2>
+
+    <ul class="content-list">
+      <% projects.forEach(project => { %>
+      <li class="content-card category-card">
+        <span class="li-dot"></span>
+
+        <h3 class="li-title">
+          <a href="/project/<%= project.project_id %>">
+            <%= project.title %>
+          </a>
+        </h3>
       </li>
-    <% }) %>
-  </ul>
+      <% }) %>
+    </ul>
+  </section>
 </main>
 
 <%- include('partials/footer') %>

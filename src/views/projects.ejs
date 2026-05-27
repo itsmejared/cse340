@@ -1,24 +1,48 @@
 <%- include('partials/header') %>
 <main>
-  <h1><%= title %></h1>
-  <ul class="project-list">
-    <% projects.forEach(project => { %>
-    <li>
-      <div>
-        <p>
-          <%= new Date(project.project_date).toLocaleDateString() %>:
-          <a href="/project/<%= project.project_id %>">
-            <%= project.title %>
-          </a>
-          (
-          <a href="/organization/<%= project.organization_id %>">
-            <%= project.organization_name %>
-          </a>
-          )
-        </p>
-      </div>
-    </li>
-    <% }) %>
-  </ul>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+    <h1><%= title %></h1>
+
+    <p class="page-description">
+      Explore upcoming service opportunities and community impact projects.
+    </p>
+
+    <ul class="content-list">
+      <% projects.forEach(project => { %>
+      <li class="content-card">
+        <div class="project-meta">
+          <span class="li-dot"></span>
+
+          <span class="project-date">
+            <%= new Date(project.project_date).toLocaleDateString() %>:
+          </span>
+
+          <h2 class="li-title">
+            <a href="/project/<%= project.project_id %>">
+              <%= project.title %>
+            </a>
+
+            <span class="project-org">
+              (
+              <a href="/organization/<%= project.organization_id %>">
+                <%= project.organization_name %>
+              </a>
+              )
+            </span>
+          </h2>
+        </div>
+
+        <% if (project.description) { %>
+        <p class="li-description"><%= project.description %></p>
+        <% } %>
+
+        <% if (project.location) { %>
+        <p class="project-location"><%= project.location %></p>
+        <% } %>
+      </li>
+      <% }) %>
+    </ul>
+  </section>
 </main>
 <%- include('partials/footer') %>

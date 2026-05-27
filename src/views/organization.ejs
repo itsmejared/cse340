@@ -1,17 +1,45 @@
 <%- include('partials/header') %>
+
 <main>
+  <section class="page-section organization-detail">
+    <%- include('partials/page-kicker') %>
+
     <h1><%= title %></h1>
 
-    <h2><%= organizationDetails.name %></h2>
-    <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+    <div class="organization-hero">
+      <img
+        class="organization-detail-logo"
+        src="/images/<%= organizationDetails.logo_filename %>"
+        alt="<%= organizationDetails.name %> logo"
+      />
 
-    <p>Description: <%= organizationDetails.description %></p>
+      <div class="organization-detail-content">
+        <h2><%= organizationDetails.name %></h2>
 
-    <h3>Service Projects</h3>
-    <ul>
+        <p class="organization-description">
+          <%= organizationDetails.description %>
+        </p>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>Service Projects</h3>
+
+      <ul class="content-list">
         <% projects.forEach(project => { %>
-            <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
+        <li class="content-card category-card">
+          <span class="li-dot"></span>
+
+          <h3 class="li-title">
+            <a href="/project/<%= project.project_id %>">
+              <%= project.title %>
+            </a>
+          </h3>
+        </li>
         <% }) %>
-    </ul>
+      </ul>
+    </div>
+  </section>
 </main>
+
 <%- include('partials/footer') %>
