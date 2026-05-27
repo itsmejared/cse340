@@ -10,7 +10,11 @@
         alt="<%= organization.name %> logo"
       />
       <div>
-        <h2><a href="/organization/<%= organization.organization_id %>"><%= organization.name %></a></h2>
+        <h2 class="organization-title">
+          <a href="/organization/<%= organization.organization_id %>"
+            ><%= organization.name %></a
+          >
+        </h2>
         <p>
           <a href="mailto:<%= organization.contact_email %>">
             <%= organization.contact_email %></a

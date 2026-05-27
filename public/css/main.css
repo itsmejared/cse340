@@ -48,6 +48,10 @@ header {
   flex-wrap: wrap;
 }
 
+.logo img{
+  height: 68px;
+}
+
 .logo a {
   font-size: 1.25rem;
   font-weight: 700;
@@ -101,6 +105,22 @@ p {
 }
 
 /* =========================
+   Organization
+========================= */
+
+.organization-title a {
+  text-decoration: none;
+  color: var(--primary-dark);
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.organization-title a:hover,
+.organization-title a:focus {
+  color: var(--primary);
+}
+
+/* =========================
    Images
 ========================= */
 
@@ -127,7 +147,6 @@ ul {
 li {
   background: var(--surface);
   padding: 1.25rem;
-  margin-bottom: 1rem;
   border-radius: 12px;
   border: 1px solid var(--border);
 
@@ -168,19 +187,42 @@ button:focus {
 }
 
 /* =========================
+   Mobile Menu
+========================= */
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--primary-dark);
+}
+
+/* =========================
    Mobile Responsive
 ========================= */
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   .nav-links {
+    display: none;
+    width: 100%;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex;
   }
 
   h1 {
