@@ -27,12 +27,38 @@
         </div>
         <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
         <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/organizations">Organizations</a></li>
-          <li><a href="/projects">Projects</a></li>
-          <li><a href="/categories">Categories</a></li>
+          <li>
+            <a href="/" class="<%= currentRoute === '/' ? 'active' : '' %>">
+              Home
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/organizations"
+              class="<%= currentRoute.startsWith('/org') ? 'active' : '' %>"
+            >
+              Organizations
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/projects"
+              class="<%= currentRoute.startsWith('/pro') ? 'active' : '' %>"
+            >
+              Projects
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/categories"
+              class="<%= currentRoute.startsWith('/cat') ? 'active' : '' %>"
+            >
+              Categories
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
-  </body>
-</html>
