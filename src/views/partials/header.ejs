@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
 
+    <script src="/js/main.js" defer></script>
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
@@ -62,3 +63,17 @@
         </ul>
       </nav>
     </header>
+
+    <% const messages = flash(); %>
+    <div class="flash-container">
+      <% Object.keys(messages).forEach(type => { %> <%
+      messages[type].forEach(msg => { %>
+      <div class="alert <%= type %>">
+        <div class="flash-title">
+          <%= type.charAt(0).toUpperCase() + type.slice(1) %>
+        </div>
+        <p class="flash-message"><%= msg %></p>
+      </div>
+      <% }); %>
+      <% }); %>
+    </div>
