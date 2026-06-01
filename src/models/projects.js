@@ -88,10 +88,47 @@ const createProject = async (
   return result.rows[0].project_id;
 };
 
+const updateProject = async (
+  projectId,
+  title,
+  description,
+  location,
+  projectDate,
+  organizationId,
+) => {
+  const query = `
+    UPDATE service_project
+    SET
+      organization_id = $1,
+      title = $2,
+      description = $3,
+      location = $4,
+      project_date = $5
+    WHERE project_id = $6
+    RETURNING project_id;
+  `;
+
+  const result = await db.query(query, [
+    organizationId,
+    title,
+    description,
+    location,
+    projectDate,
+    projectId,
+  ]);
+
+  if (result.rows.length === 0) {
+    throw new Error("Failed to update project");
+  }
+
+  return result.rows[0].project_id;
+};
+
 export {
   getAllProjects,
   getProjectsByOrganizationId,
   getUpcomingProjects,
   getProjectDetails,
   createProject,
+  updateProject,
 };

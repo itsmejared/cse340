@@ -1,0 +1,97 @@
+<%- include('partials/header') %>
+
+<main>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+    <h1><%= title %></h1>
+
+    <p>Update the project information.</p>
+
+    <form
+      class="form"
+      action="/edit-project/<%= projectDetails.project_id %>"
+      method="POST"
+    >
+      <div class="form-group">
+        <label class="form-label" for="title">
+          Project Title
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="title"
+          value="<%= projectDetails.title %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">
+          Description
+        </label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="description"
+        ><%= projectDetails.description %></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="location">
+          Location
+        </label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="location"
+          value="<%= projectDetails.location %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="projectDate">
+          Project Date
+        </label>
+        <input
+          class="form-control"
+          type="date"
+          id="projectDate"
+          name="projectDate"
+          value="<%= projectDetails.project_date.toISOString().split('T')[0] %>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="organizationId">
+          Organization
+        </label>
+        <select
+          class="form-control"
+          id="organizationId"
+          name="organizationId"
+        >
+          <% organizations.forEach(organization => { %>
+            <option
+              value="<%= organization.organization_id %>"
+              <%= organization.organization_id === projectDetails.organization_id
+                    ? "selected"
+                    : ""
+              %>
+            >
+              <%= organization.name %>
+            </option>
+          <% }); %>
+        </select>
+      </div>
+
+      <button type="submit" class="primary-button">
+        Update Project
+      </button>
+
+    </form>
+
+  </section>
+</main>
+
+<%- include('partials/footer') %>
