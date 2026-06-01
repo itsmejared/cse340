@@ -13,84 +13,80 @@
       method="POST"
     >
       <div class="form-group">
-        <label class="form-label" for="title">
-          Project Title
-        </label>
+        <label class="form-label" for="title"> Project Title </label>
         <input
           class="form-control"
           type="text"
           id="title"
           name="title"
           value="<%= projectDetails.title %>"
+          maxlength="200"
+          required
         />
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="description">
-          Description
-        </label>
+        <label class="form-label" for="description"> Description </label>
         <textarea
           class="form-control"
           id="description"
           name="description"
-        ><%= projectDetails.description %></textarea>
+          maxlength="1000"
+          required
+        >
+<%= projectDetails.description %></textarea
+        >
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="location">
-          Location
-        </label>
+        <label class="form-label" for="location"> Location </label>
         <input
           class="form-control"
           type="text"
           id="location"
           name="location"
+          maxlength="200"
+          required
           value="<%= projectDetails.location %>"
         />
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="projectDate">
-          Project Date
-        </label>
+        <label class="form-label" for="projectDate"> Project Date </label>
         <input
           class="form-control"
           type="date"
           id="projectDate"
           name="projectDate"
           value="<%= projectDetails.project_date.toISOString().split('T')[0] %>"
+          required
         />
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="organizationId">
-          Organization
-        </label>
+        <label class="form-label" for="organizationId"> Organization </label>
         <select
           class="form-control"
           id="organizationId"
           name="organizationId"
+          required
         >
           <% organizations.forEach(organization => { %>
-            <option
-              value="<%= organization.organization_id %>"
-              <%= organization.organization_id === projectDetails.organization_id
-                    ? "selected"
-                    : ""
-              %>
-            >
-              <%= organization.name %>
-            </option>
+          <% if (organization.organization_id === projectDetails.organization_id) { %>
+          <option value="<%= organization.organization_id %>" selected>
+            <%= organization.name %>
+          </option>
+          <% } else { %>
+          <option value="<%= organization.organization_id %>">
+            <%= organization.name %>
+          </option>
+          <% } %>
           <% }); %>
         </select>
       </div>
 
-      <button type="submit" class="primary-button">
-        Update Project
-      </button>
-
+      <button type="submit" class="primary-button">Update Project</button>
     </form>
-
   </section>
 </main>
 

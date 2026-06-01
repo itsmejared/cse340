@@ -581,6 +581,13 @@ h3.li-title {
   padding: 1.4rem 1.5rem;
 }
 
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 /* =========================
    Images
 ========================= */

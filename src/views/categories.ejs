@@ -12,14 +12,28 @@
       <li class="content-card category-card">
         <span class="li-dot"></span>
 
-        <h3 class="li-title">
-          <a href="/category/<%= category.category_id %>">
-            <%= category.name %>
-          </a>
-        </h3>
+        <div class="category-row">
+          <h3 class="li-title">
+            <a href="/category/<%= category.category_id %>">
+              <%= category.name %>
+            </a>
+          </h3>
+
+          <h3 class="li-title">
+            <a
+              href="/edit-category/<%= category.category_id %>"
+              class="secondary-button"
+            >
+              Edit
+            </a>
+          </h3>
+        </div>
       </li>
       <% }) %>
     </ul>
+    <div class="page-actions">
+      <a href="/new-category" class="primary-button"> Add New Category </a>
+    </div>
   </section>
 </main>
 <%- include('partials/footer') %>
