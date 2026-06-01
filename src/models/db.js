@@ -86,7 +86,7 @@ const testConnection = async () => {
     logger.info("Database connection successful:", result.rows[0].current_time);
     return true;
   } catch (error) {
-    logger.error("Database connection failed:", error.message);
+    logger.error(`Database connection failed: ${error.message}`);
     throw error;
   }
 };

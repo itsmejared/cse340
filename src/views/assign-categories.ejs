@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<main>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+
+    <h1>Assign Categories</h1>
+
+    <p>
+      Select the categories that should be assigned to
+      <strong><%= projectDetails.title %></strong>.
+    </p>
+
+    <form
+      class="form"
+      action="/assign-categories/<%= projectId %>"
+      method="POST"
+    >
+      <div class="form-group">
+        <% categories.forEach(category => { %> <% const isAssigned =
+        assignedCategories.some( assigned => assigned.category_id ===
+        category.category_id ); %>
+
+        <label class="checkbox-option">
+          <% if (isAssigned) { %>
+          <input
+            type="checkbox"
+            name="categoryIds"
+            value="<%= category.category_id %>"
+            checked
+          />
+          <% } else { %>
+          <input
+            type="checkbox"
+            name="categoryIds"
+            value="<%= category.category_id %>"
+          />
+          <% } %>
+
+          <span><%= category.name %></span>
+        </label>
+
+        <% }); %>
+      </div>
+
+      <button type="submit" class="primary-button">Update Categories</button>
+    </form>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

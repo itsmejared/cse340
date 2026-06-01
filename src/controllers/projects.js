@@ -103,7 +103,8 @@ const processNewProjectForm = async (req, res) => {
     req.flash("success", "New service project created successfully!");
     res.redirect(`/project/${newProjectId}`);
   } catch (error) {
-    logger.error("Error creating new project:", error);
+    logger.error(`Error creating new project: ${error.message}`);
+    logger.error(error.stack);
     req.flash("error", "There was an error creating the service project.");
     res.redirect("/new-project");
   }

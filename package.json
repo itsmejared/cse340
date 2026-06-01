@@ -17,8 +17,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node server.js",
-    "lint": "eslint .",
-    "format": "prettier --write \"**/*.{ejs,json,js,css}\""
+    "lint": "eslint ."
   },
   "dependencies": {
     "ejs": "^5.0.2",
