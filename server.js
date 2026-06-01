@@ -1,3 +1,6 @@
+import logger from "./src/middleware/logger.js";
+globalThis.logger = logger;
+
 import express from "express";
 import session from "express-session";
 import { fileURLToPath } from "url";
@@ -50,7 +53,7 @@ app.set("views", path.join(__dirname, "src/views"));
 // Middleware to log all incoming requests
 app.use((req, res, next) => {
   if (NODE_ENV === "development") {
-    console.log(`${req.method} ${req.url}`);
+    logger.info(`${req.method} ${req.url}`);
   }
   next(); // Pass control to the next middleware or route
 });
@@ -75,8 +78,8 @@ app.use((req, res, next) => {
 // Global error handler
 app.use((err, req, res, next) => {
   // Log error details for debugging
-  console.error("Error occurred:", err.message);
-  console.error("Stack trace:", err.stack);
+  logger.error("Error occurred:", err.message);
+  logger.error("Stack trace:", err.stack);
 
   // Determine status and template
   const status = err.status || 500;
@@ -96,9 +99,9 @@ app.use((err, req, res, next) => {
 app.listen(PORT, async () => {
   try {
     await testConnection();
-    console.log(`Server is running at http://127.0.0.1:${PORT}`);
-    console.log(`Environment: ${NODE_ENV}`);
+    logger.info(`Server is running at http://127.0.0.1:${PORT}`);
+    logger.info(`Environment: ${NODE_ENV}`);
   } catch (error) {
-    console.error("Error connecting to the database:", error);
+    logger.error("Error connecting to the database:", error);
   }
 });

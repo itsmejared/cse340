@@ -53,7 +53,7 @@ const createOrganization = async (
   }
 
   if (process.env.ENABLE_SQL_LOGGING === "true") {
-    console.log(
+    logger.info(
       "Created new organization with ID:",
       result.rows[0].organization_id,
     );
@@ -90,7 +90,7 @@ const updateOrganization = async (
   }
 
   if (process.env.ENABLE_SQL_LOGGING === "true") {
-    console.log("Updated organization with ID:", organizationId);
+    logger.info("Updated organization with ID:", organizationId);
   }
 
   return result.rows[0].organization_id;
