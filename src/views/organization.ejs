@@ -39,6 +39,7 @@
         <% }) %>
       </ul>
     </div>
+    <% if (user && user.role_name === 'admin') { %>
     <div class="page-actions">
       <a
         href="/edit-organization/<%= organizationDetails.organization_id %>"
@@ -47,6 +48,7 @@
         Update Organization
       </a>
     </div>
+    <% } %>
   </section>
 </main>
 

@@ -34,11 +34,13 @@
       </li>
       <% }); %>
     </ul>
+    <% if (user && user.role_name === 'admin') { %>
     <div class="page-actions">
       <a href="/new-organization" class="primary-button">
         Add New Organization
       </a>
     </div>
+    <% } %>
   </section>
 </main>
 <%- include('partials/footer') %>

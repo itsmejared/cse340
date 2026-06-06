@@ -51,6 +51,7 @@
         </ul>
       </div>
     </div>
+    <% if (user && user.role_name === 'admin') { %>
     <div class="page-actions">
       <a href="/edit-project/<%= project.project_id %>" class="primary-button">
         Edit Project
@@ -62,6 +63,7 @@
         Edit Categories
       </a>
     </div>
+    <% } %>
   </section>
 </main>
 

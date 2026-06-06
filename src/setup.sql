@@ -194,7 +194,7 @@ INSERT INTO roles (role_name, role_description) VALUES
     ('admin', 'Administrator with full system access');
 
 -- ========================================
--- Create Table: Roles
+-- Create Table: Users
 -- ========================================
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
@@ -206,7 +206,7 @@ CREATE TABLE users (
 );
 
 -- ========================================
--- Insert sample data: Roles
+-- Insert sample data: Users
 -- ========================================
 INSERT INTO users (name, email, password_hash, role_id) 
 VALUES ('testuser', 'test@example.com', 'placeholder_hash', 1);
