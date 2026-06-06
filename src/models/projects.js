@@ -82,7 +82,7 @@ const createProject = async (
   }
 
   if (process.env.ENABLE_SQL_LOGGING === "true") {
-    logger.info("Created new project with ID:", result.rows[0].project_id);
+    logger.info(`Created new project with ID: ${result.rows[0].project_id}`);
   }
 
   return result.rows[0].project_id;

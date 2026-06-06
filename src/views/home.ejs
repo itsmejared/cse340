@@ -21,6 +21,13 @@
       src="/images/cse340-service-network.png"
       alt="CSE 340 Service Network logo"
     />
+
+    <% if (isLoggedIn) { %>
+    <p>
+      Ready to manage your account?
+      <a href="/dashboard">Go to My Dashboard</a>.
+    </p>
+    <% } %>
   </section>
 </main>
 <%- include('partials/footer') %>

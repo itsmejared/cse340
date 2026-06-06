@@ -60,6 +60,31 @@
               Categories
             </a>
           </li>
+
+          <% if (!isLoggedIn) { %>
+          <li>
+            <a
+              href="/register"
+              class="<%= currentRoute.startsWith('/reg') ? 'active' : '' %>"
+              >Register</a
+            >
+          </li>
+          <li>
+            <a
+              href="/login"
+              class="<%= currentRoute.startsWith('/login') ? 'active' : '' %>"
+              >Login</a
+            >
+          </li>
+          <% } else { %>
+          <li>
+            <a
+              href="/logout"
+              class="<%= currentRoute.startsWith('/logout') ? 'active' : '' %>"
+              >Logout</a
+            >
+          </li>
+          <% } %>
         </ul>
       </nav>
     </header>
@@ -77,3 +102,5 @@
       <% }); %>
       <% }); %>
     </div>
+  </body>
+</html>

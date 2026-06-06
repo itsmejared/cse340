@@ -83,7 +83,7 @@ if (
 const testConnection = async () => {
   try {
     const result = await db.query("SELECT NOW() as current_time");
-    logger.info("Database connection successful:", result.rows[0].current_time);
+    logger.info(`Database connection successful: ${result.rows[0].current_time}`);
     return true;
   } catch (error) {
     logger.error(`Database connection failed: ${error.message}`);

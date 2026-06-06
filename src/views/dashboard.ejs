@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<main>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+
+    <h1><%= title %></h1>
+
+    <p>Welcome back! Here is your account information.</p>
+
+    <h2>Dashboard</h2>
+
+    <div class="form-group">
+      <label class="form-label">Name</label>
+      <p><%= name %></p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <p><%= email %></p>
+    </div>
+
+    <hr />
+
+    <p>
+      Use the navigation menu to manage organizations, projects, and categories.
+    </p>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
