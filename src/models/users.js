@@ -36,7 +36,7 @@ const authenticateUser = async (email, password) => {
 
 const findUserByEmail = async (email) => {
   const query = `
-        SELECT u.user_id, u.email, u.password_hash, r.role_name 
+        SELECT u.user_id, u.name, u.email, u.password_hash, r.role_name 
         FROM users u
         JOIN roles r ON u.role_id = r.role_id
         WHERE u.email = $1
@@ -51,4 +51,21 @@ const findUserByEmail = async (email) => {
 const verifyPassword = (password, passwordHash) =>
   bcrypt.compare(password, passwordHash);
 
-export { createUser, authenticateUser };
+const getAllUsers = async () => {
+  const query = `
+    SELECT
+      u.user_id,
+      u.name,
+      u.email,
+      r.role_name
+    FROM users u
+    JOIN roles r
+      ON u.role_id = r.role_id
+    ORDER BY u.name;
+  `;
+
+  const result = await db.query(query);
+  return result.rows;
+};
+
+export { createUser, authenticateUser, getAllUsers };

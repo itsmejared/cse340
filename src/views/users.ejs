@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<main>
+  <section class="page-section">
+    <%- include('partials/page-kicker') %>
+
+    <h1><%= title %></h1>
+
+    <% if (users.length > 0) { %>
+    <div class="content-card">
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users.forEach(user => { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <span class="role-pill"> <%= user.role_name %> </span>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <% } else { %>
+    <p>No users found.</p>
+    <% } %>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

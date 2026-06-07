@@ -20,11 +20,15 @@
       <p><%= email %></p>
     </div>
 
+    <% if (user && user.role_name === "admin") { %>
     <hr />
 
+    <h3>Administration</h3>
+
     <p>
-      Use the navigation menu to manage organizations, projects, and categories.
+      <a href="/users">View Registered Users</a>
     </p>
+    <% } %>
   </section>
 </main>
 

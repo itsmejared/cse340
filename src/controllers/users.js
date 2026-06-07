@@ -1,6 +1,6 @@
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
-import { createUser, authenticateUser } from "../models/users.js";
+import { createUser, authenticateUser, getAllUsers } from "../models/users.js";
 
 const userValidation = [
   body("name")
@@ -111,7 +111,7 @@ const requireLogin = (req, res, next) => {
   next();
 };
 
-const requireRole = (role) => (req, res, next) => {
+const requireRole = (role, fallback= "/") => (req, res, next) => {
   // Check if user is logged in first
   if (!req.session?.user) {
     req.flash("error", "You must be logged in to access this page.");
@@ -121,7 +121,7 @@ const requireRole = (role) => (req, res, next) => {
   // Check if user's role matches the required role
   if (req.session.user.role_name !== role) {
     req.flash("error", "You do not have permission to access this page.");
-    return res.redirect("/");
+    return res.redirect(fallback);
   }
 
   // User has required role, continue
@@ -137,6 +137,21 @@ const showDashboard = (req, res) => {
   });
 };
 
+const showUsersPage = async (req, res) => {
+  try {
+    const users = await getAllUsers();
+
+    res.render("users", {
+      title: "Registered Users",
+      users,
+    });
+  } catch (error) {
+    logger.error(error);
+    req.flash("error", "Unable to load users.");
+    res.redirect("/dashboard");
+  }
+};
+
 export {
   showUserRegistrationForm,
   processUserRegistrationForm,
@@ -147,4 +162,5 @@ export {
   requireLogin,
   requireRole,
   showDashboard,
+  showUsersPage,
 };
