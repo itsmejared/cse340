@@ -20,6 +20,42 @@
       <p><%= email %></p>
     </div>
 
+    <hr />
+
+    <h3>Volunteer Projects</h3>
+
+    <% if (volunteerProjects.length === 0) { %>
+
+    <p>You are not currently volunteering for any projects.</p>
+
+    <% } else { %>
+
+    <ul class="content-list volunteer-project-list">
+      <% volunteerProjects.forEach(project => { %>
+
+      <li class="content-card volunteer-card">
+        <h3 class="li-title">
+          <a href="/project/<%= project.project_id %>">
+            <%= project.title %>
+          </a>
+        </h3>
+
+        <form
+          action="/project/<%= project.project_id %>/unvolunteer"
+          method="POST"
+        >
+          <input type="hidden" name="returnTo" value="/dashboard" />
+          <button type="submit" class="primary-button">
+             🗑 Remove Volunteer Registration
+          </button>
+        </form>
+      </li>
+
+      <% }) %>
+    </ul>
+
+    <% } %>
+
     <% if (user && user.role_name === "admin") { %>
     <hr />
 

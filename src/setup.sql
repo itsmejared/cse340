@@ -210,3 +210,23 @@ CREATE TABLE users (
 -- ========================================
 INSERT INTO users (name, email, password_hash, role_id) 
 VALUES ('testuser', 'test@example.com', 'placeholder_hash', 1);
+
+-- ========================================
+-- Create Table: Service Project x Volunteer
+-- ========================================
+CREATE TABLE service_project_volunteer (
+    project_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, user_id),
+
+    CONSTRAINT fk_spv_project
+        FOREIGN KEY (project_id)
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_spv_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+);

@@ -18,6 +18,8 @@ import {
   showEditProjectForm,
   processEditProjectForm,
   projectValidation,
+  volunteerForProject,
+  removeVolunteer,
 } from "./controllers/projects.js";
 import {
   showCategoriesPage,
@@ -147,5 +149,10 @@ router.get("/dashboard", requireLogin, showDashboard);
 
 //User list
 router.get("/users", requireRole("admin", "/dashboard"), showUsersPage);
+
+//Volunteer
+router.post("/project/:id/volunteer", requireLogin, volunteerForProject);
+
+router.post("/project/:id/unvolunteer", requireLogin, removeVolunteer);
 
 export default router;

@@ -1,6 +1,7 @@
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import { createUser, authenticateUser, getAllUsers } from "../models/users.js";
+import { getProjectsForVolunteer } from "../models/projects.js";
 
 const userValidation = [
   body("name")
@@ -111,29 +112,36 @@ const requireLogin = (req, res, next) => {
   next();
 };
 
-const requireRole = (role, fallback= "/") => (req, res, next) => {
-  // Check if user is logged in first
-  if (!req.session?.user) {
-    req.flash("error", "You must be logged in to access this page.");
-    return res.redirect("/login");
-  }
+const requireRole =
+  (role, fallback = "/") =>
+  (req, res, next) => {
+    // Check if user is logged in first
+    if (!req.session?.user) {
+      req.flash("error", "You must be logged in to access this page.");
+      return res.redirect("/login");
+    }
 
-  // Check if user's role matches the required role
-  if (req.session.user.role_name !== role) {
-    req.flash("error", "You do not have permission to access this page.");
-    return res.redirect(fallback);
-  }
+    // Check if user's role matches the required role
+    if (req.session.user.role_name !== role) {
+      req.flash("error", "You do not have permission to access this page.");
+      return res.redirect(fallback);
+    }
 
-  // User has required role, continue
-  next();
-};
+    // User has required role, continue
+    next();
+  };
 
-const showDashboard = (req, res) => {
+const showDashboard = async (req, res) => {
   const user = req.session.user;
+
+  const volunteerProjects =
+    await getProjectsForVolunteer(user.user_id);
+
   res.render("dashboard", {
     title: "Dashboard",
     name: user.name,
     email: user.email,
+    volunteerProjects,
   });
 };
 
